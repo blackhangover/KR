@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="menu">
+            <div class="menu__item">
+                <a href="/">Main</a>
+            </div>
+            <div th:if="${#strings.equals(user.role, 'ADMIN')}" class="menu__item">
+                <a href="/order/list">Order list</a>
+            </div>
+            <div th:if="${#strings.equals(user.username, 'Anon')}" class="menu__item">
+                <a href="/user/registration">Registration</a>
+            </div>
+            <div th:if="${#strings.equals(user.username, 'Anon')}" class="menu__item">
+                <a href="/login">Login</a>
+            </div>
+            <div class="menu__item">
+                <a href="/animal/category">Search animal</a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__body">
+            <h2 align="center">Order</h2>
+            <div class="order__info">
+                <p>Thank you for your application, in the near future specialists will contact you by e-mail to clarify the details and conduct an interview.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__content">
+            (C) Something
+        </div>
+    </div>
+</div>
+</body>
+</html>

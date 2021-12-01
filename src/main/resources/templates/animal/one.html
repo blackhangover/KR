@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show animal</title>
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="menu">
+            <div class="menu__item">
+                <a href="/">Main</a>
+            </div>
+            <div th:if="${#strings.equals(user.role, 'ADMIN')}" class="menu__item">
+                <a href="/order/list">Order list</a>
+            </div>
+            <div th:if="${#strings.equals(user.username, 'Anon')}" class="menu__item">
+                <a href="/user/registration">Registration</a>
+            </div>
+            <div th:if="${#strings.equals(user.username, 'Anon')}" class="menu__item">
+                <a href="/login">Login</a>
+            </div>
+            <div class="menu__item">
+                <a href="/animal/category">Search animal</a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content__body">
+            <h2 align="center">ABOUT ANIMAL</h2>
+            <div class="animal__info">
+                <div class="info__image">
+                    <img width="150" height="150" th:src="${animal.imageUrl}">
+                </div>
+                <div class="info__text">
+                    <p th:if="${#strings.equals(user.role, 'ADMIN')}" th:text="${'Is taken: ' + animal.taken}"></p>
+                    <p th:text="${'Name: ' + animal.name}"></p>
+                    <p th:text="${'Age: ' + animal.age}"></p>
+                    <p th:text="${'Sex: ' + animal.sex}"></p>
+                    <p th:text="${'Breed: ' + animal.breed}"></p>
+                    <p th:text="${'About: ' + animal.description}"></p>
+                </div>
+                <div class="info__action">
+                    <a th:if="!${#strings.equals(user.username, 'Anon')}" th:href="@{/order/{id}(id=${animal.id})}">Order</a>
+                    <a th:if="${#strings.equals(user.role, 'ADMIN')}" th:href="@{/animal/taken/{id}(id=${animal.id})}">Make As Taken</a>
+                    <a th:if="${#strings.equals(user.role, 'ADMIN')}" th:href="@{/animal/delete/{id}(id=${animal.id})}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer__content">
+            (C) Something
+        </div>
+    </div>
+</div>
+</body>
+</html>
